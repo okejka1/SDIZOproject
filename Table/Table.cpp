@@ -174,10 +174,13 @@ void Table::display() {
     if (size == 0) {
         cout << "The table is empty!\n";
     }
-//    cout << "size: " << size << endl;
+    cout << "================================================" << endl;
     for (int i = 0; i < size; i++) {
         cout << tab[i] << " ";
     }
+    cout << endl;
+    cout << "================================================" << endl;
+
 }
 
 void Table::generateTable(int sizeOfTable) {

@@ -15,6 +15,8 @@ public:
 
     void menuList();
 
+    void menuHeap();
+
 };
 
 

@@ -16,7 +16,7 @@ DoubleLinkedList::DoubleLinkedList() {
 DoubleLinkedList::~DoubleLinkedList() {
     if (head == tail)
         delete head;
-    while(head != tail){
+    while (head != tail) {
         head = head->next;
         delete head->prev;
     }
@@ -25,10 +25,11 @@ DoubleLinkedList::~DoubleLinkedList() {
 void DoubleLinkedList::displayList() {
 //    cout<<"Head: "<< head << endl;
 //    cout<<"Tail: "<< tail << endl;
-    if(head == nullptr){
-        cout<<"list is empty\n";
+    if (head == nullptr) {
+        cout << "list is empty!\n";
         return;
     }
+    cout << "=============================================\n";
     Node *c = head;
     while (c != tail->next && c != nullptr) {
         cout << c->getValue() << " ";
@@ -41,6 +42,10 @@ void DoubleLinkedList::displayList() {
         cout << c->getValue() << " ";
         c = c->prev;
     }
+    cout << endl;
+    cout << "=============================================\n";
+    cout << endl;
+
 
 }
 
@@ -145,7 +150,6 @@ void DoubleLinkedList::loadFromFile(string fileName) {
         cout << "File error - OPEN\n";
 
 
-
 }
 
 void DoubleLinkedList::generateList(int sizeOfList) {
@@ -161,17 +165,15 @@ void DoubleLinkedList::generateList(int sizeOfList) {
     }
 }
 
-void DoubleLinkedList::removeElement(Node* element) {
-    if(element->prev != nullptr){
+void DoubleLinkedList::removeElement(Node *element) {
+    if (element->prev != nullptr) {
         element->prev->setNext(element->next);
-    }
-    else{
+    } else {
         head = element->next;
     }
-    if(element->next != nullptr){
+    if (element->next != nullptr) {
         element->next->setPrev(element->prev);
-    }
-    else{
+    } else {
         tail = element->prev;
     }
     delete element;
@@ -196,37 +198,32 @@ void DoubleLinkedList::removeGiven(int val) { // removing element with given val
         }
         element = element->next;
     }
-    if(element== nullptr){
-        cout<<"No such value in the list\n";
-    }
-    else if(element->prev == nullptr && element->next == nullptr)
-    {
+    if (element == nullptr) {
+        cout << "No such value in the list\n";
+    } else if (element->prev == nullptr && element->next == nullptr) {
 
         head = nullptr;
         tail = nullptr;
         delete element;
         size = 0;
-    }
-    else if(element->prev == nullptr){
+    } else if (element->prev == nullptr) {
         removeFront();
-    }
-    else if(element->next == nullptr){
+    } else if (element->next == nullptr) {
         removeBack();
-    } else{
+    } else {
         removeElement(element);
     }
 
 }
 
 bool DoubleLinkedList::isValueInList(int val) {
-    if(head == nullptr)
+    if (head == nullptr)
         return false;
 
-    Node * element = head;
-    while(element != nullptr)
-    {
-        if(element->getValue() == val){
-            cout <<"There is such a value in the list\n";
+    Node *element = head;
+    while (element != nullptr) {
+        if (element->getValue() == val) {
+            cout << "There is such a value in the list\n";
             return true;
         }
         element = element->next;
@@ -237,10 +234,10 @@ bool DoubleLinkedList::isValueInList(int val) {
 
 void DoubleLinkedList::clear() {
 
-    while(head != tail){
+    while (head != tail) {
         head = head->next;
         delete head->prev;
-        size --;
+        size--;
     }
     if (head == tail) {
         head = nullptr;
