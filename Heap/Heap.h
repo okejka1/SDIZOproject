@@ -6,11 +6,29 @@
 
 class Heap {
 
+    int size;
+
+
     Heap();
 
     ~Heap();
 
     void loadFromFile();
+
+    void displayHeap();
+
+    void generateHeap();
+
+    void deleteRoot();
+
+    void deleteValue(int val);
+
+    void addValue(int val);
+
+    void isValueInHeap(int val);
+
+
+
 
 
 
