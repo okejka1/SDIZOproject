@@ -35,6 +35,7 @@ int main() {
                 break;
             case 3:
                 cout << "You've chosen a heap!\n";
+                menu.menuHeap();
                 break;
             case 4:
                 cout << "bye\n";
