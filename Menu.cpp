@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include "Table/Table.h"
 #include "DoubleLinkedList/DoubleLinkedList.h"
+#include "Heap/Heap.h"
 
 
 using namespace std;
@@ -153,3 +154,75 @@ void Menu::menuList() {
 
 
 }
+
+void Menu::menuHeap() {
+
+    Heap myHeap;
+
+    string fileName;
+
+    int val;
+    int index;
+    int option = -1;
+
+    do {
+        cout << "\n==== TABLE MENU ====\n";
+        cout << "1.Load your heap from file\n";
+        cout << "2.Delete\n";
+        cout << "3.Add\n";
+        cout << "4.Find entered value\n";
+        cout << "5.Generate the heap\n";
+        cout << "6.Display the heap\n";
+        cout << "7.Time tests\n";
+        cout << "8.Exit\n";
+        cin >> option;
+
+        std::cin.clear();
+        fflush(stdin);
+
+        switch (option) {
+
+            case 1: // loading from a file
+//                cout << "Enter your file name:";
+//                cin >> fileName;
+//                fileName = "..\\Input\\" + fileName;
+//                myHeap.loadFromFile(fileName);
+//                myHeap.display();
+//                break;
+            case 2: // deleting a value from given index
+//                cout << "Enter index:";
+//                cin >> index;
+//                myHeap.deleteFromTable(index);
+//                myHeap.display();
+//                break;
+//            case 3: // adding a given value to given index
+//                cout << "Enter value:";
+//                cin >> val;
+//                myHeap.addValue(val);
+//                myHeap.display();
+//                break;
+//            case 4: // searching for a given value
+//                cout << "Enter value:";
+//                cin >> val;
+//                myHeap.IsValueInTable(val);
+//                break;
+            case 5: // generating a heap
+                cout << "Enter the size of your array:";
+                cin >> val;
+                myHeap.generateHeap(val);
+                myHeap.displayHeap();
+                break;
+            case 6: // displaying a table
+                myHeap.displayHeap();
+                break;
+            case 7: // time measurements and some tests
+                break;
+            case 8: // exit
+                break;
+            default:
+                cout << "Input error!\n";
+                break;
+        }
+    } while (option != 8);
+}
+
