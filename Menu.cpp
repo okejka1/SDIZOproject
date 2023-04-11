@@ -159,10 +159,10 @@ void Menu::menuHeap() {
 
     Heap myHeap;
 
+
     string fileName;
 
     int val;
-    int index;
     int option = -1;
 
     do {
@@ -195,24 +195,24 @@ void Menu::menuHeap() {
 //                myHeap.deleteFromTable(index);
 //                myHeap.display();
 //                break;
-//            case 3: // adding a given value to given index
-//                cout << "Enter value:";
-//                cin >> val;
-//                myHeap.addValue(val);
-//                myHeap.display();
-//                break;
+            case 3: // adding a given value to the heap
+                cout << "Enter value:";
+                cin >> val;
+                myHeap.insertVal(val);
+                myHeap.displayHeap();
+                break;
 //            case 4: // searching for a given value
 //                cout << "Enter value:";
 //                cin >> val;
 //                myHeap.IsValueInTable(val);
 //                break;
-            case 5: // generating a heap
-                cout << "Enter the size of your array:";
+            case 5: // generating the heap
+                cout << "Enter the size of your heap:";
                 cin >> val;
                 myHeap.generateHeap(val);
                 myHeap.displayHeap();
                 break;
-            case 6: // displaying a table
+            case 6: // displaying the heap
                 myHeap.displayHeap();
                 break;
             case 7: // time measurements and some tests

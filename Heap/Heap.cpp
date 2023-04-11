@@ -5,10 +5,13 @@ using namespace std;
 
 Heap::Heap() {
     size = 0;
-    heap = nullptr;
+    capacity = 1000000;
+    heap = new int [capacity];
 }
 
 Heap::~Heap() {
+    heap = nullptr;
+    size = 0;
 
 }
 
@@ -50,16 +53,12 @@ void Heap::heapify(int i) { // maintaining the property of max heap
         largest = r;
     }
     if (i != largest) {
-//         temp = heap[i];
-//         heap[i] = heap[largest];
-//         heap[largest] = temp;
         swap(heap[i], heap[largest]);
         heapify(largest);
     }
 }
 
-void Heap::insert(int val) {
-
+void Heap::insertVal(int val) {
 
     size++;
 
@@ -71,22 +70,39 @@ void Heap::insert(int val) {
         i = parent(i);
     }
 
+}
+
+void Heap::deleteVal(int val) {
+
 
 }
 
-void Heap::generateHeap(int val) {
+
+void Heap::generateHeap(int sizeOfHeap) {
 
 
+    delete[] heap;
 
     srand(time(NULL));
+    int *updated = new int [sizeOfHeap];
+    for (int i = 0; i < sizeOfHeap; i++) {
+        updated[i] = (rand() % 100);
+    }
 
-//    for (int i = 0; i < size; i++) {
-//        heap[i] = (rand() % 100);
-//    }
+    heap = updated;
+    size = sizeOfHeap;
 
-//    for (int i = (size - 1) / 2; i > 0; i--) {
-//        heapify(i);
-//    }
+    for(int i = 0; i < sizeOfHeap; i++)
+    {
+        cout << updated[i] << " ";
+    }
+    cout  << endl;
+
+    for (int i = (size-1)/2; i >= 0; i--) {
+        heapify(i);
+    }
+
+
 
 
 }
