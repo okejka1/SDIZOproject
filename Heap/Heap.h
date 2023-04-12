@@ -14,9 +14,15 @@ class Heap {
 
 public:
 
-    int size; // current size of a heap
 
-    int *heap; // pointer to the root of a heap
+
+    int size; // current size of a heap
+    int capacity; // max size of a heap
+    int *heap; // pointer to an  array of heap elements
+
+
+
+    // methods
 
     int parent(int i);
 
@@ -26,15 +32,15 @@ public:
 
     void heapify(int i);
 
-    void generateHeap(int size);
+    void generateHeap(int sizeOfHeap);
 
-    void insert(int val);
+    void insertVal(int val);
 
     void swap(int &a, int &b);
 
     void displayHeap();
 
-
+    void deleteVal(int val);
 
     Heap();
 
