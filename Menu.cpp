@@ -175,39 +175,41 @@ void Menu::menuHeap() {
         cout << "6.Display the heap\n";
         cout << "7.Time tests\n";
         cout << "8.Exit\n";
-        cin >> option;
 
         std::cin.clear();
         fflush(stdin);
 
+        cin >> option;
+
+
         switch (option) {
 
             case 1: // loading from a file
-//                cout << "Enter your file name:";
-//                cin >> fileName;
-//                fileName = "..\\Input\\" + fileName;
-//                myHeap.loadFromFile(fileName);
-//                myHeap.display();
-//                break;
+                cout << "Enter your file name:";
+                cin >> fileName;
+                fileName = "..\\Input\\" + fileName;
+                myHeap.loadFromFile(fileName);
+                myHeap.displayHeap();
+                break;
             case 2: // deleting a value from given index
-//                cout << "Enter index:";
-//                cin >> index;
-//                myHeap.deleteFromTable(index);
-//                myHeap.display();
-//                break;
+                cout << "Enter value to deletion:";
+                cin >> val;
+                myHeap.deleteVal(val);
+                myHeap.displayHeap();
+                break;
             case 3: // adding a given value to the heap
                 cout << "Enter value:";
                 cin >> val;
                 myHeap.insertVal(val);
                 myHeap.displayHeap();
                 break;
-//            case 4: // searching for a given value
-//                cout << "Enter value:";
-//                cin >> val;
-//                myHeap.IsValueInTable(val);
-//                break;
+            case 4: // searching for a given value
+                cout << "Enter value:";
+                cin >> val;
+                myHeap.isValInHeap(val);
+                break;
             case 5: // generating the heap
-                cout << "Enter the size of your heap:";
+                cout << "Enter the size of your heap";
                 cin >> val;
                 myHeap.generateHeap(val);
                 myHeap.displayHeap();

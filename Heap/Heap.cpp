@@ -6,7 +6,7 @@ using namespace std;
 Heap::Heap() {
     size = 0;
     capacity = 1000000;
-    heap = new int [capacity];
+    heap = new int[capacity];
 }
 
 Heap::~Heap() {
@@ -60,6 +60,7 @@ void Heap::heapify(int i) { // maintaining the property of max heap
 
 void Heap::insertVal(int val) {
 
+
     size++;
 
     int i = size - 1;
@@ -73,7 +74,8 @@ void Heap::insertVal(int val) {
 }
 
 void Heap::deleteVal(int val) {
-
+    increaseKey(isValInHeap(val), INT_MAX);
+    deleteRoot();
 
 }
 
@@ -81,38 +83,123 @@ void Heap::deleteVal(int val) {
 void Heap::generateHeap(int sizeOfHeap) {
 
 
-    delete[] heap;
-
     srand(time(NULL));
-    int *updated = new int [sizeOfHeap];
+
     for (int i = 0; i < sizeOfHeap; i++) {
-        updated[i] = (rand() % 100);
+        heap[i] = (rand() % 1000);
     }
 
-    heap = updated;
     size = sizeOfHeap;
 
-    for(int i = 0; i < sizeOfHeap; i++)
-    {
-        cout << updated[i] << " ";
-    }
-    cout  << endl;
 
-    for (int i = (size-1)/2; i >= 0; i--) {
+    for (int i = (size - 1) / 2; i >= 0; i--) {
         heapify(i);
     }
-
-
 
 
 }
 
 void Heap::displayHeap() {
-    for(int i = 0; i < size; i++)
-    {
-        cout << heap[i] << " ";
+    cout << endl;
+    int levels = ceil(log2(size + 1)); // calculate the number of levels in the heap
+    int index = 0;
+    for (int i = 0; i < levels; i++) {
+        // print spaces to align the nodes at each level
+        for (int j = 0; j < pow(2, levels - i - 1) - 1; j++) {
+            cout << " ";
+        }
+        // print the nodes at each level
+        for (int j = 0; j < pow(2, i) && index < size; j++) {
+            cout << heap[index++];
+            // print spaces to align the nodes at each level
+            for (int k = 0; k < pow(2, levels - i) - 1; k++) {
+                cout << " ";
+            }
+        }
+        cout << std::endl;
+
     }
 
+    cout << "Displaying heap as an array:" << endl;
+    for (int i = 0; i < size; i++) {
+        cout << heap[i] << " ";
+    }
+    cout << "size: " << size << endl;
+}
+
+int Heap::deleteRoot() {
+    if (size <= 0) {
+        cout << "heap underflow" << endl;
+        return -1;
+    } else if (size == 1) {
+        size--;
+        return heap[0];
+    }
+    int root = heap[0];
+    heap[0] = heap[size - 1];
+    size--;
+    heapify(0);
+    return root;
+
+
+}
+
+
+int Heap::isValInHeap(int val) {
+
+    for (int i = 0; i < size; i++) {
+        if (heap[i] == val) {
+            cout << "Value was found in the heap!" << endl;
+            return i;
+        }
+    }
+    cout << "Value was NOT found in the heap" << endl;
+    return -1;
+
+}
+
+void Heap::increaseKey(int i, int key) {
+    if (key < heap[i]) {
+        cout << "new key is smaller than current key" << endl;
+        return;
+    }
+    heap[i] = key;
+    while ((i != 0) && (heap[parent(i)] < heap[i])) {
+        swap(heap[i], heap[parent(i)]);
+        i = parent(i);
+    }
+
+
+}
+
+void Heap::loadFromFile(string fileName) {
+    int elementsCount;
+    ifstream file;
+    file.open(fileName);
+    if (file.is_open()) {
+
+        file >> elementsCount;
+        if (file.fail()) {
+            cout << "File error - READ SIZE\n";
+            file.close();
+        } else {
+            size = elementsCount;
+            int val;
+            for (int i = 0; i < elementsCount; i++) {
+                file >> val;
+                if (file.fail()) {
+                    cout << "File error - READ DATA\n";
+                    break;
+                } else
+                    heap[i] = val;
+            }
+            for (int i = (size - 1) / 2; i >= 0; i--) {
+                heapify(i);
+            }
+            file.close();
+        }
+    } else
+        cout << "File error - OPEN\n";
 }
 
 

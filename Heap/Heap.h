@@ -40,7 +40,17 @@ public:
 
     void displayHeap();
 
+    int deleteRoot();
+
+    int isValInHeap(int val);
+
+
     void deleteVal(int val);
+
+    void increaseKey(int i, int key);
+
+    void loadFromFile(string fileName);
+
 
     Heap();
 
