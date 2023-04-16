@@ -4,29 +4,28 @@
 #include "Heap/Heap.h"
 
 
-using namespace std;
-
 void Menu::menuTable() {
 
     Table myTable;
 
-    string fileName;
+    std::string fileName;
 
     int val;
     int index;
     int option = -1;
+    numberOfTests = 100;
 
     do {
-        cout << "\n==== TABLE MENU ====\n";
-        cout << "1.Load your table from file\n";
-        cout << "2.Delete\n";
-        cout << "3.Add\n";
-        cout << "4.Find entered value\n";
-        cout << "5.Generate a table\n";
-        cout << "6.Display the table\n";
-        cout << "7.Time tests\n";
-        cout << "8.Exit\n";
-        cin >> option;
+        std::cout << "\n==== TABLE MENU ====\n";
+        std::cout << "1.Load your table from file\n";
+        std::cout << "2.Delete\n";
+        std::cout << "3.Add\n";
+        std::cout << "4.Find entered value\n";
+        std::cout << "5.Generate a table\n";
+        std::cout << "6.Display the table\n";
+        std::cout << "7.Time tests\n";
+        std::cout << "8.Exit\n";
+        std::cin >> option;
 
         std::cin.clear();
         fflush(stdin);
@@ -34,34 +33,34 @@ void Menu::menuTable() {
         switch (option) {
 
             case 1: // loading from a file
-                cout << "Enter your file name:";
-                cin >> fileName;
+                std::cout << "Enter your file name:";
+                std::cin >> fileName;
                 fileName = "..\\Input\\" + fileName;
                 myTable.loadFromFile(fileName);
                 myTable.display();
                 break;
             case 2: // deleting a value from given index
-                cout << "Enter index:";
-                cin >> index;
+                std::cout << "Enter index:";
+                std::cin >> index;
                 myTable.deleteFromTable(index);
                 myTable.display();
                 break;
             case 3: // adding a given value to given index
-                cout << "Enter index:";
-                cin >> index;
-                cout << "Enter value:";
-                cin >> val;
+                std::cout << "Enter index:";
+                std::cin >> index;
+                std::cout << "Enter value:";
+                std::cin >> val;
                 myTable.addValue(index, val);
                 myTable.display();
                 break;
             case 4: // searching for a given value
-                cout << "Enter value:";
-                cin >> val;
+                std::cout << "Enter value:";
+                std::cin >> val;
                 myTable.IsValueInTable(val);
                 break;
             case 5: // generating an array
-                cout << "Enter the size of your array:";
-                cin >> val;
+                std::cout << "Enter the size of your array:";
+                std::cin >> val;
                 myTable.generateTable(val);
                 myTable.display();
                 break;
@@ -69,11 +68,15 @@ void Menu::menuTable() {
                 myTable.display();
                 break;
             case 7: // time measurements and some tests
+                std::cout << "Enter the size of your array to conduct tests" << std::endl;
+                std::cin >> val;
+                myTable.generateTable(val);
+
                 break;
             case 8: // exit
                 break;
             default:
-                cout << "Input error!\n";
+                std::cout << "Input error!\n";
                 break;
         }
     } while (option != 8);
@@ -83,22 +86,24 @@ void Menu::menuList() {
 
     DoubleLinkedList myList;
 
-    string fileName;
+    std::string fileName;
     int val;
     int option = -1;
     int index;
+    numberOfTests = 100;
+
 
     do {
-        cout << "\n==== LIST MENU ====\n";
-        cout << "1.Load your list from file\n";
-        cout << "2.Delete\n";
-        cout << "3.Add\n";
-        cout << "4.Find entered value\n";
-        cout << "5.Generate a random list \n";
-        cout << "6.Display the list\n";
-        cout << "7.Time tests\n";
-        cout << "8.Exit\n";
-        cin >> option;
+        std::cout << "\n==== LIST MENU ====\n";
+        std::cout << "1.Load your list from file\n";
+        std::cout << "2.Delete\n";
+        std::cout << "3.Add\n";
+        std::cout << "4.Find entered value\n";
+        std::cout << "5.Generate a random list \n";
+        std::cout << "6.Display the list\n";
+        std::cout << "7.Time tests\n";
+        std::cout << "8.Exit\n";
+        std::cin >> option;
 
         std::cin.clear();
         fflush(stdin);
@@ -106,36 +111,36 @@ void Menu::menuList() {
         switch (option) {
 
             case 1: // loading from a file
-                cout << "Enter your file name:";
-                cin >> fileName;
+                std::cout << "Enter your file name:";
+                std::cin >> fileName;
                 fileName = "..\\Input\\" + fileName;
 //                    myList.clear();
                 myList.loadFromFile(fileName);
                 myList.displayList();
                 break;
             case 2: // deleting a value from given index
-                cout << "Enter value:";
-                cin >> val;
+                std::cout << "Enter value:";
+                std::cin >> val;
                 myList.removeGiven(val);
                 myList.displayList();
                 break;
             case 3: // adding a given value to the list
-                cout << "Enter index:";
-                cin >> index;
-                cout << "Enter value:";
-                cin >> val;
-                cout << endl;
+                std::cout << "Enter index:";
+                std::cin >> index;
+                std::cout << "Enter value:";
+                std::cin >> val;
+                std::cout << std::endl;
                 myList.addElement(index, val);
                 myList.displayList();
                 break;
             case 4: // searching for a given value
-                cout << "Enter value:";
-                cin >> val;
+                std::cout << "Enter value:";
+                std::cin >> val;
                 myList.isValueInList(val);
                 break;
             case 5: // generating an array
-                cout << "Enter the size of your list:";
-                cin >> val;
+                std::cout << "Enter the size of your list:";
+                std::cin >> val;
                 myList.generateList(val);
                 myList.displayList();
                 break;
@@ -143,11 +148,14 @@ void Menu::menuList() {
                 myList.displayList();
                 break;
             case 7: // time measurements and some tests
+                std::cout << "Enter the size of your double linked list to conduct tests" << std::endl;
+                std::cin >> val;
+                myList.generateList(val);
                 break;
             case 8: // exit
                 break;
             default:
-                cout << "Input error!\n";
+                std::cout << "Input error!\n";
                 break;
         }
     } while (option != 8);
@@ -160,57 +168,59 @@ void Menu::menuHeap() {
     Heap myHeap;
 
 
-    string fileName;
+    std::string fileName;
 
     int val;
     int option = -1;
+    numberOfTests = 100;
+
 
     do {
-        cout << "\n==== TABLE MENU ====\n";
-        cout << "1.Load your heap from file\n";
-        cout << "2.Delete\n";
-        cout << "3.Add\n";
-        cout << "4.Find entered value\n";
-        cout << "5.Generate the heap\n";
-        cout << "6.Display the heap\n";
-        cout << "7.Time tests\n";
-        cout << "8.Exit\n";
+        std::cout << "\n==== TABLE MENU ====\n";
+        std::cout << "1.Load your heap from file\n";
+        std::cout << "2.Delete\n";
+        std::cout << "3.Add\n";
+        std::cout << "4.Find entered value\n";
+        std::cout << "5.Generate the heap\n";
+        std::cout << "6.Display the heap\n";
+        std::cout << "7.Time tests\n";
+        std::cout << "8.Exit\n";
 
         std::cin.clear();
         fflush(stdin);
 
-        cin >> option;
+        std::cin >> option;
 
 
         switch (option) {
 
             case 1: // loading from a file
-                cout << "Enter your file name:";
-                cin >> fileName;
+                std::cout << "Enter your file name:";
+                std::cin >> fileName;
                 fileName = "..\\Input\\" + fileName;
                 myHeap.loadFromFile(fileName);
                 myHeap.displayHeap();
                 break;
             case 2: // deleting a value from given index
-                cout << "Enter value to deletion:";
-                cin >> val;
+                std::cout << "Enter value to deletion:";
+                std::cin >> val;
                 myHeap.deleteVal(val);
                 myHeap.displayHeap();
                 break;
             case 3: // adding a given value to the heap
-                cout << "Enter value:";
-                cin >> val;
+                std::cout << "Enter value:";
+                std::cin >> val;
                 myHeap.insertVal(val);
                 myHeap.displayHeap();
                 break;
             case 4: // searching for a given value
-                cout << "Enter value:";
-                cin >> val;
+                std::cout << "Enter value:";
+                std::cin >> val;
                 myHeap.isValInHeap(val);
                 break;
             case 5: // generating the heap
-                cout << "Enter the size of your heap";
-                cin >> val;
+                std::cout << "Enter the size of your heap";
+                std::cin >> val;
                 myHeap.generateHeap(val);
                 myHeap.displayHeap();
                 break;
@@ -218,11 +228,14 @@ void Menu::menuHeap() {
                 myHeap.displayHeap();
                 break;
             case 7: // time measurements and some tests
+                std::cout << "Enter the size of your heap to conduct tests" << std::endl;
+                std::cin >> val;
+                myHeap.generateHeap(val);
                 break;
             case 8: // exit
                 break;
             default:
-                cout << "Input error!\n";
+                std::cout << "Input error!\n";
                 break;
         }
     } while (option != 8);

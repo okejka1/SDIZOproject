@@ -4,7 +4,6 @@
 #include <iostream>
 #include "Node.h"
 
-using namespace std;
 
 
 class DoubleLinkedList {
@@ -25,7 +24,7 @@ public:
 
     void displayList();
 
-    void loadFromFile(string fileName);
+    void loadFromFile(std::string fileName);
 
     void pushFront(int val);
 

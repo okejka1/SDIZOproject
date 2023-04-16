@@ -1,6 +1,5 @@
 #include "Heap.h"
 
-using namespace std;
 
 
 Heap::Heap() {
@@ -83,10 +82,14 @@ void Heap::deleteVal(int val) {
 void Heap::generateHeap(int sizeOfHeap) {
 
 
-    srand(time(NULL));
+//    srand(time(NULL));
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 1000000);
 
     for (int i = 0; i < sizeOfHeap; i++) {
-        heap[i] = (rand() % 1000);
+//        heap[i] = (rand() % 1000);
+        heap[i] = dis(gen);
     }
 
     size = sizeOfHeap;
@@ -100,36 +103,36 @@ void Heap::generateHeap(int sizeOfHeap) {
 }
 
 void Heap::displayHeap() {
-    cout << endl;
+    std::cout << std::endl;
     int levels = ceil(log2(size + 1)); // calculate the number of levels in the heap
     int index = 0;
     for (int i = 0; i < levels; i++) {
         // print spaces to align the nodes at each level
         for (int j = 0; j < pow(2, levels - i - 1) - 1; j++) {
-            cout << " ";
+            std::cout << " ";
         }
         // print the nodes at each level
         for (int j = 0; j < pow(2, i) && index < size; j++) {
-            cout << heap[index++];
+            std::cout << heap[index++];
             // print spaces to align the nodes at each level
             for (int k = 0; k < pow(2, levels - i) - 1; k++) {
-                cout << " ";
+                std::cout << " ";
             }
         }
-        cout << std::endl;
+        std::cout << std::endl;
 
     }
 
-    cout << "Displaying heap as an array:" << endl;
+    std::cout << "Displaying heap as an array:" << std::endl;
     for (int i = 0; i < size; i++) {
-        cout << heap[i] << " ";
+        std::cout << heap[i] << " ";
     }
-    cout << "size: " << size << endl;
+    std::cout << "size: " << size << std::endl;
 }
 
 int Heap::deleteRoot() {
     if (size <= 0) {
-        cout << "heap underflow" << endl;
+        std::cout << "heap underflow" << std::endl;
         return -1;
     } else if (size == 1) {
         size--;
@@ -149,18 +152,18 @@ int Heap::isValInHeap(int val) {
 
     for (int i = 0; i < size; i++) {
         if (heap[i] == val) {
-            cout << "Value was found in the heap!" << endl;
+            std::cout << "Value was found in the heap!" << std::endl;
             return i;
         }
     }
-    cout << "Value was NOT found in the heap" << endl;
+    std::cout << "Value was NOT found in the heap" << std::endl;
     return -1;
 
 }
 
 void Heap::increaseKey(int i, int key) {
     if (key < heap[i]) {
-        cout << "new key is smaller than current key" << endl;
+        std::cout << "new key is smaller than current key" << std::endl;
         return;
     }
     heap[i] = key;
@@ -172,15 +175,15 @@ void Heap::increaseKey(int i, int key) {
 
 }
 
-void Heap::loadFromFile(string fileName) {
+void Heap::loadFromFile(std::string fileName) {
     int elementsCount;
-    ifstream file;
+    std::ifstream file;
     file.open(fileName);
     if (file.is_open()) {
 
         file >> elementsCount;
         if (file.fail()) {
-            cout << "File error - READ SIZE\n";
+            std::cout << "File error - READ SIZE\n";
             file.close();
         } else {
             size = elementsCount;
@@ -188,7 +191,7 @@ void Heap::loadFromFile(string fileName) {
             for (int i = 0; i < elementsCount; i++) {
                 file >> val;
                 if (file.fail()) {
-                    cout << "File error - READ DATA\n";
+                    std::cout << "File error - READ DATA\n";
                     break;
                 } else
                     heap[i] = val;
@@ -199,7 +202,7 @@ void Heap::loadFromFile(string fileName) {
             file.close();
         }
     } else
-        cout << "File error - OPEN\n";
+        std::cout << "File error - OPEN\n";
 }
 
 

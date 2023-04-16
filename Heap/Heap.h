@@ -7,7 +7,7 @@
 #ifndef SDIZOPROJECT_HEAP_H
 #define SDIZOPROJECT_HEAP_H
 
-using namespace std;
+
 
 class Heap {
 
@@ -49,7 +49,7 @@ public:
 
     void increaseKey(int i, int key);
 
-    void loadFromFile(string fileName);
+    void loadFromFile(std::string fileName);
 
 
     Heap();

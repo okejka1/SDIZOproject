@@ -1,6 +1,5 @@
 #include <iostream>
 
-using namespace std;
 
 #ifndef SDIZOPROJECT_MENU_H
 #define SDIZOPROJECT_MENU_H
@@ -9,6 +8,8 @@ using namespace std;
 class Menu {
 
 public:
+
+    int numberOfTests;
 
 
     void menuTable();

@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <time.h>
+#include <random>
 
 Table::Table() {
     tab = nullptr;
@@ -12,15 +13,15 @@ Table::~Table() {
     delete[] tab;
 }
 
-void Table::loadFromFile(string fileName) {
+void Table::loadFromFile(std::string fileName) {
     int elementsCount;
-    ifstream file;
+    std::ifstream file;
     file.open(fileName);
     if (file.is_open()) {
 
         file >> elementsCount;
         if (file.fail()) {
-            cout << "File error - READ SIZE\n";
+            std::cout << "File error - READ SIZE\n";
             file.close();
         } else {
             delete [] tab;
@@ -30,7 +31,7 @@ void Table::loadFromFile(string fileName) {
             for (int i = 0; i < elementsCount; i++) {
                 file >> val;
                 if (file.fail()) {
-                    cout << "File error - READ DATA\n";
+                    std::cout << "File error - READ DATA\n";
                     break;
                 } else
                     tab[i] = val;
@@ -38,25 +39,25 @@ void Table::loadFromFile(string fileName) {
             file.close();
         }
     } else
-        cout << "File error - OPEN\n";
+        std::cout << "File error - OPEN\n";
 }
 
 
 bool Table::IsValueInTable(int val) {
     for (int i = 0; i < size; i++) {
         if (tab[i] == val) {
-            cout << "There is value = " << val << " at index " << i << endl;
+            std::cout << "There is value = " << val << " at index " << i << std::endl;
             return true;
         }
     }
-    cout << "no value found\n";
+    std::cout << "no value found\n";
     return false;
 }
 
 void Table::addValue(int index, int value) {
 
     if (index < 0 || index > size) {
-        cout << "Wrong input of an index - chose an index in a range of the table \n";
+        std::cout << "Wrong input of an index - chose an index in a range of the table \n";
     } else if (index == 0) {
         addValueFront(value);
     } else if (index == size) {
@@ -116,7 +117,7 @@ void Table::deleteFromTableFront() {
         tab = updated;
         size--;
     } else {
-        cout << "The table is empty \n";
+        std::cout << "The table is empty \n";
     }
 
 
@@ -133,7 +134,7 @@ void Table::deleteFromTableBack() {
         tab = updated;
         size--;
     } else {
-        cout << "The table is empty\n";
+        std::cout << "The table is empty\n";
     }
 
 }
@@ -141,9 +142,9 @@ void Table::deleteFromTableBack() {
 
 void Table::deleteFromTable(int index) {
     if (size == 0) {
-        cout << "No elements to delete - the table is empty \n";
+        std::cout << "No elements to delete - the table is empty \n";
     } else if (index >= size) {
-        cout << "No such index in the table \n";
+        std::cout << "No such index in the table \n";
     } else {
         if (index == 0) {
             deleteFromTableFront();
@@ -172,14 +173,14 @@ void Table::deleteFromTable(int index) {
 
 void Table::display() {
     if (size == 0) {
-        cout << "The table is empty!\n";
+        std::cout << "The table is empty!\n";
     }
-    cout << "================================================" << endl;
+    std::cout << "================================================" << std::endl;
     for (int i = 0; i < size; i++) {
-        cout << tab[i] << " ";
+        std::cout << tab[i] << " ";
     }
-    cout << endl;
-    cout << "================================================" << endl;
+    std::cout << std::endl;
+    std::cout << "================================================" << std::endl;
 
 }
 
@@ -187,11 +188,39 @@ void Table::generateTable(int sizeOfTable) {
 
     srand(time(NULL));
     int *updated = new int[sizeOfTable];
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 1000000);
     for (int i = 0; i < sizeOfTable; i++) {
-        updated[i] = (rand() % 1000);
+//        updated[i] = (rand() % 1000);
+        updated[i] = dis(gen);
     }
-    delete[] tab;
-    tab = updated;
-    size = sizeOfTable;
+        delete[] tab;
+        tab = updated;
+        size = sizeOfTable;
+
+    }
+
+
+void Table::measureTime(int numberOfTests) {
+
+    int value, position;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 1000000); // range for  random value
+    std::uniform_int_distribution<> distribution(1, size-2);  // range for random position
+    for(int i = 0; i < numberOfTests; i++)
+    {
+        // adding element at the beginning
+        T
+
+    }
+
+
+
+
+
 
 }
+
+

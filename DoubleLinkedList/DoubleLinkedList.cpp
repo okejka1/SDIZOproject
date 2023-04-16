@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <time.h>
 #include <fstream>
+#include <random>
 
 
 DoubleLinkedList::DoubleLinkedList() {
@@ -26,25 +27,25 @@ void DoubleLinkedList::displayList() {
 //    cout<<"Head: "<< head << endl;
 //    cout<<"Tail: "<< tail << endl;
     if (head == nullptr) {
-        cout << "list is empty!\n";
+        std::cout << "list is empty!\n";
         return;
     }
-    cout << "=============================================\n";
+    std::cout << "=============================================\n";
     Node *c = head;
     while (c != tail->next && c != nullptr) {
-        cout << c->getValue() << " ";
+        std::cout << c->getValue() << " ";
         c = c->next;
     }
-    cout << endl;
+    std::cout << std::endl;
 
     c = tail;
     while (c != head->prev && c != nullptr) {
-        cout << c->getValue() << " ";
+        std::cout << c->getValue() << " ";
         c = c->prev;
     }
-    cout << endl;
-    cout << "=============================================\n";
-    cout << endl;
+    std::cout << std::endl;
+    std::cout << "=============================================\n";
+    std::cout << std::endl;
 
 
 }
@@ -115,20 +116,20 @@ void DoubleLinkedList::addElement(int index, int val) {
 //        cout << "Finished adding\n";
 
     } else {
-        cout << "Enter index in range of a list\n";
+        std::cout << "Enter index in range of a list\n";
     }
 
 }
 
-void DoubleLinkedList::loadFromFile(string fileName) {
+void DoubleLinkedList::loadFromFile(std::string fileName) {
     int elementsCount;
-    ifstream file;
+    std::ifstream file;
     file.open(fileName);
     if (file.is_open()) {
 
         file >> elementsCount;
         if (file.fail()) {
-            cout << "File error - READ SIZE\n";
+            std::cout << "File error - READ SIZE\n";
             file.close();
         } else {
 //            cout << "test!\n";
@@ -138,7 +139,7 @@ void DoubleLinkedList::loadFromFile(string fileName) {
             for (int i = 0; i < elementsCount; i++) {
                 file >> val;
                 if (file.fail()) {
-                    cout << "File error - READ DATA\n";
+                    std::cout << "File error - READ DATA\n";
                     break;
                 } else
                     pushBack(val);
@@ -147,7 +148,7 @@ void DoubleLinkedList::loadFromFile(string fileName) {
 //            cout << "size after:" << size << endl;
         }
     } else
-        cout << "File error - OPEN\n";
+        std::cout << "File error - OPEN\n";
 
 
 }
@@ -157,10 +158,14 @@ void DoubleLinkedList::generateList(int sizeOfList) {
     while (head != nullptr) {
         removeBack();
     }
-    srand(time(NULL));
+//    srand(time(NULL));
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 1000000);
     int number;
     for (int i = 0; i < sizeOfList; i++) {
-        number = (rand() % 1000);
+//        number = (rand() % 1000);
+        number = dis(gen);
         pushFront(number);
     }
 }
@@ -199,7 +204,7 @@ void DoubleLinkedList::removeGiven(int val) { // removing element with given val
         element = element->next;
     }
     if (element == nullptr) {
-        cout << "No such value in the list\n";
+        std::cout << "No such value in the list\n";
     } else if (element->prev == nullptr && element->next == nullptr) {
 
         head = nullptr;
@@ -223,12 +228,12 @@ bool DoubleLinkedList::isValueInList(int val) {
     Node *element = head;
     while (element != nullptr) {
         if (element->getValue() == val) {
-            cout << "There is such a value in the list\n";
+            std::cout << "There is such a value in the list\n";
             return true;
         }
         element = element->next;
     }
-    cout << "Value not found in the list\n";
+    std::cout << "Value not found in the list\n";
     return false;
 }
 
