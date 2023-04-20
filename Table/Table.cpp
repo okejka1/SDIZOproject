@@ -1,4 +1,5 @@
 #include "Table.h"
+#include "../Timer.h"
 #include <fstream>
 #include <cstdlib>
 #include <time.h>
@@ -202,25 +203,109 @@ void Table::generateTable(int sizeOfTable) {
     }
 
 
-void Table::measureTime(int numberOfTests) {
+void Table::measureTime(int numberOfTests, int sizeOfStructure) {
 
-    int value, position;
+
+    std::ofstream file;
+
+    for(int i = 0; i < 7; i++){
+        results[i] = 0;
+    }
+
+    Timer timer;
+
+    int value;
+    int index;
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(1, 1000000); // range for  random value
-    std::uniform_int_distribution<> distribution(1, size-2);  // range for random position
+    std::uniform_int_distribution<> distribution(1, size-2);  // range for random index
+
+
     for(int i = 0; i < numberOfTests; i++)
     {
-        // adding element at the beginning
-        T
+
+
+        // adding an element at the beginning
+        value = dis(gen);
+        timer.startTime();
+        this->addValueFront(value);
+        timer.stopTime();
+        std::cout << "Insertion of an element at the beginning of an array " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[0] += timer.nanoMeasuredTime();
+
+        // adding an element from the end
+        value = dis(gen);
+        timer.startTime();
+        this->addValueBack(value);
+        timer.stopTime();
+        std::cout << "Insertion of an element at the end of an array " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[1] += timer.nanoMeasuredTime();
+
+        // adding an  element at the random index
+        value = dis(gen);
+        index = distribution(gen);
+        timer.startTime();
+        this->addValue(index,value);
+        timer.stopTime();
+        std::cout << "Insertion of an element at random index of an array " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[2] += timer.nanoMeasuredTime();
+
+        // deleting an element at the beginning
+        timer.startTime();
+        this->deleteFromTableFront();
+        timer.stopTime();
+        std::cout << "Deletion of an element at the beginning of an array " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[3] += timer.nanoMeasuredTime();
+
+
+        // deleting an element at the end of an array
+        timer.startTime();
+        this->deleteFromTableBack();
+        timer.stopTime();
+        std::cout << "Deletion of an element at the end of an array " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[4] += timer.nanoMeasuredTime();
+
+        // deleting an element at  the random position
+
+        index = distribution(gen);
+        timer.startTime();
+        this->deleteFromTable(index);
+        timer.stopTime();
+        std::cout << "Deletion of an element at the random index of an array " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[5] += timer.nanoMeasuredTime();
+
+
+        // searching for a value in an array
+        value = dis(gen);
+        timer.startTime();
+        this->IsValueInTable(value);
+        timer.stopTime();
+        std::cout << "Search of an element of an array " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[6] += timer.nanoMeasuredTime();
 
     }
 
 
-
-
-
-
+    std::string fileName = "..\\Table\\table" + std::to_string(sizeOfStructure) + ".txt";
+    file.open(fileName);
+    if (file.is_open()) {
+        file << "TEST OF AN  " << sizeOfStructure << " ARRAY OUT OF " << numberOfTests << " PROBES\n";
+        file << "Average results of each operation on the array:\n";
+        file << "Average time of the insertion of an element at the beginning of the array " << results[0]/numberOfTests << " [ns]\n";
+        file << "Average time of the insertion of an element at the end of the array " << results[1]/numberOfTests << " [ns]\n";
+        file << "Average time of the insertion of an element at the random index of the array " << results[2]/numberOfTests << " [ns]\n";
+        file << "Average time of the deletion of an element at the beginning  of the array " << results[3]/numberOfTests << " [ns]\n";
+        file << "Average time of the deletion of an element at the end  of the array " << results[4]/numberOfTests << " [ns]\n";
+        file << "Average time of the deletion of an element at the random index  of the array " << results[5]/numberOfTests << " [ns]\n";
+        file << "Average time of the search  of a random element in the array " << results[6]/numberOfTests << " [ns]\n";
+        file.close();
+    } else
+        std::cout << "File error - OPEN\n";
 }
+
+
+
+
 
 

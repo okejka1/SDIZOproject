@@ -1,5 +1,4 @@
 #include <iostream>
-#include
 
 #ifndef SDIZOPROJECT_TABLE_H
 #define SDIZOPROJECT_TABLE_H
@@ -13,7 +12,7 @@ public:
 
     int size; // size of the table
 
-    long results[7] = {0, 0, 0, 0, 0, 0, 0}; // table to store time measurements for an array tests
+    long results[7]; // table to store time measurements for an array tests
 /*
 result[0] ->  inserting an element at the beginning of an array
 result[1] ->  inserting an element at the end of an array
@@ -52,11 +51,11 @@ result[6] ->  searching for a random element of an array
     void generateTable(int size);
 
 
-   // void measureTime(int sizeOfStructure, long long *results, int numberOfTests);
+   // void measureTime(int sizeOfStructure, long *results, int numberOfTests);
 
-    void measureTime(int numberOfTests);
 
-    void measureTime();
+
+    void measureTime(int numberOfTests, int sizeOfStructure);
 };
 
 

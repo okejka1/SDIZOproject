@@ -18,7 +18,6 @@ public:
 
     long long nanoMeasuredTime();
 
-    Timer();
 
 };
 

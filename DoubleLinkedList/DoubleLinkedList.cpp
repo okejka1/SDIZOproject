@@ -1,4 +1,5 @@
 #include "DoubleLinkedList.h"
+#include "../Timer.h"
 #include <iostream>
 #include <cstdlib>
 #include <time.h>
@@ -186,6 +187,32 @@ void DoubleLinkedList::removeElement(Node *element) {
 
 }
 
+void DoubleLinkedList::removeFromIndex(int index){
+    Node *element = head;
+    for (int i = 0; i < index; i++)
+    {
+        element = element->next;
+    }
+    if (element == nullptr) {
+        std::cout << "No such value in the list\n";
+    } else if (element->prev == nullptr && element->next == nullptr) {
+
+        head = nullptr;
+        tail = nullptr;
+        delete element;
+        size = 0;
+    } else if (element->prev == nullptr) {
+        removeFront();
+    } else if (element->next == nullptr) {
+        removeBack();
+    } else {
+        removeElement(element);
+    }
+
+
+
+}
+
 void DoubleLinkedList::removeFront() {
     removeElement(head);
 }
@@ -252,4 +279,104 @@ void DoubleLinkedList::clear() {
 
 
 }
+
+void DoubleLinkedList::measureTime(int numberOfTests, int sizeOfStructure) {
+    std::ofstream file;
+
+    for(int i = 0; i < 7; i++){
+        results[i] = 0;
+    }
+
+    Timer timer;
+
+    int value;
+    int index;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 1000000); // range for  random value
+    std::uniform_int_distribution<> distribution(1, size-2);  // range for random index
+
+
+    for(int i = 0; i < numberOfTests; i++)
+    {
+
+
+        // adding an element at the beginning
+        value = dis(gen);
+        timer.startTime();
+        this->pushFront(value);
+        timer.stopTime();
+        std::cout << "Insertion of an element at the beginning of a list" << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[0] += timer.nanoMeasuredTime();
+
+        // adding an element from the end
+        value = dis(gen);
+        timer.startTime();
+        this->pushBack(value);
+        timer.stopTime();
+        std::cout << "Insertion of an element at the end of a list " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[1] += timer.nanoMeasuredTime();
+
+        // adding an  element at the random index
+        value = dis(gen);
+        index = distribution(gen);
+        timer.startTime();
+        this->addElement(index,value);
+        timer.stopTime();
+        std::cout << "Insertion of an element at random index of a list" << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[2] += timer.nanoMeasuredTime();
+
+        // deleting an element at the beginning
+        timer.startTime();
+        this->removeFront();
+        timer.stopTime();
+        std::cout << "Deletion of an element at the beginning of a list " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[3] += timer.nanoMeasuredTime();
+
+
+        // deleting an element at the end of a list
+        timer.startTime();
+        this->removeBack();
+        timer.stopTime();
+        std::cout << "Deletion of an element at the end of a list " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[4] += timer.nanoMeasuredTime();
+
+        // deleting an element at  the random position
+
+        index = distribution(gen);
+        timer.startTime();
+        this->removeFromIndex(index);
+        timer.stopTime();
+        std::cout << "Deletion of an element at the random index of a list " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[5] += timer.nanoMeasuredTime();
+
+
+        // searching for a value in a list
+        value = dis(gen);
+        timer.startTime();
+        this->isValueInList(value);
+        timer.stopTime();
+        std::cout << "Search of an element of a list " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[6] += timer.nanoMeasuredTime();
+
+    }
+
+
+    std::string fileName = "..\\DoubleLinkedList\\doublelinkedlist" + std::to_string(sizeOfStructure) + ".txt";
+    file.open(fileName);
+    if (file.is_open()) {
+        file << "TEST OF AN  " << sizeOfStructure << " DOUBLELINKEDLIST OUT OF " << numberOfTests << " PROBES\n";
+        file << "Average results of each operation on the list:\n";
+        file << "Average time of the insertion of an element at the beginning of the list " << results[0]/numberOfTests << " [ns]\n";
+        file << "Average time of the insertion of an element at the end of the list " << results[1]/numberOfTests << " [ns]\n";
+        file << "Average time of the insertion of an element at the random index of the list " << results[2]/numberOfTests << " [ns]\n";
+        file << "Average time of the deletion of an element at the beginning  of the list " << results[3]/numberOfTests << " [ns]\n";
+        file << "Average time of the deletion of an element at the end  of the list " << results[4]/numberOfTests << " [ns]\n";
+        file << "Average time of the deletion of an element at the random index  of the list " << results[5]/numberOfTests << " [ns]\n";
+        file << "Average time of the search  of a random element in the list " << results[6]/numberOfTests << " [ns]\n";
+        file.close();
+    } else
+        std::cout << "File error - OPEN\n";
+}
+
 

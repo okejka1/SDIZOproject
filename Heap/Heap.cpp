@@ -1,5 +1,5 @@
 #include "Heap.h"
-
+#include "../Timer.h"
 
 
 Heap::Heap() {
@@ -205,6 +205,60 @@ void Heap::loadFromFile(std::string fileName) {
         std::cout << "File error - OPEN\n";
 }
 
+void Heap::measureTime(int numberOfTests, int sizeOfStructure) {
+    std::ofstream file;
+
+    for (int i = 0; i < 3; i++) {
+        results[i] = 0;
+    }
+
+    Timer timer;
+
+    int value;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 1000000); // range for  random value
+
+
+    for (int i = 0; i < numberOfTests; i++) {
+
+
+        // insertion of the value to the heap
+        value = dis(gen);
+        timer.startTime();
+        this->insertVal(value);
+        timer.stopTime();
+        std::cout << "Insertion of an element to the heap " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[0] += timer.nanoMeasuredTime();
+
+        // deletion of the root from the heap
+        timer.startTime();
+        this->deleteRoot();
+        timer.stopTime();
+        std::cout << "Deletion of the root from the heap " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[1] += timer.nanoMeasuredTime();
+
+        // search of the element from the heap
+        value = dis(gen);
+        timer.startTime();
+        this->isValInHeap(value);
+        timer.stopTime();
+        std::cout << "Search of the element from the heap " << timer.nanoMeasuredTime() << " [ns]" << endl;
+        results[2] += timer.nanoMeasuredTime();
+
+    }
+
+    std::string fileName = "..\\Heap\\heap" + std::to_string(sizeOfStructure) + ".txt";
+    file.open(fileName);
+    if (file.is_open()) {
+        file << "TEST OF A  " << sizeOfStructure << " HEAP OUT OF " << numberOfTests << " PROBES\n";
+        file << "Average results of each operation on the heap:\n";
+        file << "Average time of the insertion of an element to the heap " << results[0]/numberOfTests << " [ns]\n";
+        file << "Average time of the deletion of the heap's root " << results[1]/numberOfTests << " [ns]\n";
+        file << "Average time of the search for a random value in the heap " << results[2]/numberOfTests << " [ns]\n";
+    } else
+        std::cout << "File error - OPEN\n";
+}
 
 
 

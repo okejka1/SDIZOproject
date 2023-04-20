@@ -71,7 +71,7 @@ void Menu::menuTable() {
                 std::cout << "Enter the size of your array to conduct tests" << std::endl;
                 std::cin >> val;
                 myTable.generateTable(val);
-
+                myTable.measureTime(numberOfTests,val);
                 break;
             case 8: // exit
                 break;
@@ -122,6 +122,7 @@ void Menu::menuList() {
                 std::cout << "Enter value:";
                 std::cin >> val;
                 myList.removeGiven(val);
+//                myList.removeFromIndex(val);
                 myList.displayList();
                 break;
             case 3: // adding a given value to the list
@@ -151,6 +152,8 @@ void Menu::menuList() {
                 std::cout << "Enter the size of your double linked list to conduct tests" << std::endl;
                 std::cin >> val;
                 myList.generateList(val);
+                myList.measureTime(numberOfTests, val);
+
                 break;
             case 8: // exit
                 break;
@@ -166,6 +169,7 @@ void Menu::menuList() {
 void Menu::menuHeap() {
 
     Heap myHeap;
+
 
 
     std::string fileName;
@@ -231,6 +235,7 @@ void Menu::menuHeap() {
                 std::cout << "Enter the size of your heap to conduct tests" << std::endl;
                 std::cin >> val;
                 myHeap.generateHeap(val);
+                myHeap.measureTime(numberOfTests,val);
                 break;
             case 8: // exit
                 break;

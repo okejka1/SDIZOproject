@@ -1,0 +1,9 @@
+TEST OF AN  7500 DOUBLELINKEDLIST OUT OF 100 PROBES
+Average results of each operation on the list:
+Average time of the insertion of an element at the beginning of the list 349 [ns]
+Average time of the insertion of an element at the end of the list 251 [ns]
+Average time of the insertion of an element at the random index of the list 12926 [ns]
+Average time of the deletion of an element at the beginning  of the list 286 [ns]
+Average time of the deletion of an element at the end  of the list 267 [ns]
+Average time of the deletion of an element at the random index  of the list 12710 [ns]
+Average time of the search  of a random element in the list 90892 [ns]

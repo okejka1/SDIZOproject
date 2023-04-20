@@ -1,0 +1,9 @@
+TEST OF AN  500000 ARRAY OUT OF 100 PROBES
+Average results of each operation on the array:
+Average time of the insertion of an element at the beginning of the array 1333820 [ns]
+Average time of the insertion of an element at the end of the array 1355481 [ns]
+Average time of the insertion of an element at the random index of the array 1383021 [ns]
+Average time of the deletion of an element at the beginning  of the array 1385003 [ns]
+Average time of the deletion of an element at the end  of the array 1357273 [ns]
+Average time of the deletion of an element at the random index  of the array 1432175 [ns]
+Average time of the search  of a random element in the array 1000624 [ns]
