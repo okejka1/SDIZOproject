@@ -1,2 +1,2 @@
 # SDIZOproject
-Academic project - Algorithms and computational complexity
+Academic project - data structures and computational complexity
