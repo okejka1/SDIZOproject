@@ -48,10 +48,11 @@ public:
 
     int isValInHeap(int val);
 
-
     void deleteVal(int val);
 
-    void increaseKey(int i, int key);
+    void deleteValByIndex(int index);
+
+    void increaseValue(int i, int value);
 
     void loadFromFile(std::string fileName);
 
@@ -60,7 +61,6 @@ public:
     Heap();
 
     ~Heap();
-
 
 };
 

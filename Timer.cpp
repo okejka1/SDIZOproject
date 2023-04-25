@@ -1,10 +1,6 @@
-//
-// Created by mhajd on 17.04.2023.
-//
 
 #include "Timer.h"
 
-#include "Timer.h"
 
 void Timer::startTime() {
     beginningTime = high_resolution_clock::now();

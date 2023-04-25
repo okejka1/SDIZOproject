@@ -1,5 +1,5 @@
 TEST OF A  100000 HEAP OUT OF 100 PROBES
 Average results of each operation on the heap:
-Average time of the insertion of an element to the heap 93 [ns]
-Average time of the deletion of the heap's root 475 [ns]
-Average time of the search for a random value in the heap 289020 [ns]
+Average time of the insertion of an element to the heap 97 [ns]
+Average time of the deletion of the heap's root 436 [ns]
+Average time of the search for a random value in the heap 284356 [ns]

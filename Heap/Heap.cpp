@@ -70,11 +70,16 @@ void Heap::insertVal(int val) {
         i = parent(i);
     }
 
+
 }
 
 void Heap::deleteVal(int val) {
-    increaseKey(isValInHeap(val), INT_MAX);
-    deleteRoot();
+    if (this->isValInHeap(val) != -1) {
+        increaseValue(isValInHeap(val), INT_MAX);
+        deleteRoot();
+    } else {
+        cout << "there is no value do delete";
+    }
 
 }
 
@@ -94,8 +99,8 @@ void Heap::generateHeap(int sizeOfHeap) {
 
     size = sizeOfHeap;
 
-
-    for (int i = (size - 1) / 2; i >= 0; i--) {
+    // floyd's algorithm
+    for (int i = (size - 1) / 2; i >= 0; i--) { // size-1/2 -> it's an index of last parent and 
         heapify(i);
     }
 
@@ -161,12 +166,12 @@ int Heap::isValInHeap(int val) {
 
 }
 
-void Heap::increaseKey(int i, int key) {
-    if (key < heap[i]) {
-        std::cout << "new key is smaller than current key" << std::endl;
+void Heap::increaseValue(int i, int value) {
+    if (value < heap[i]) {
+        std::cout << "new value is smaller than current value" << std::endl;
         return;
     }
-    heap[i] = key;
+    heap[i] = value;
     while ((i != 0) && (heap[parent(i)] < heap[i])) {
         swap(heap[i], heap[parent(i)]);
         i = parent(i);
@@ -242,6 +247,7 @@ void Heap::measureTime(int numberOfTests, int sizeOfStructure) {
         value = dis(gen);
         timer.startTime();
         this->isValInHeap(value);
+//        this->searchHeap(value);
         timer.stopTime();
         std::cout << "Search of the element from the heap " << timer.nanoMeasuredTime() << " [ns]" << endl;
         results[2] += timer.nanoMeasuredTime();
@@ -253,11 +259,21 @@ void Heap::measureTime(int numberOfTests, int sizeOfStructure) {
     if (file.is_open()) {
         file << "TEST OF A  " << sizeOfStructure << " HEAP OUT OF " << numberOfTests << " PROBES\n";
         file << "Average results of each operation on the heap:\n";
-        file << "Average time of the insertion of an element to the heap " << results[0]/numberOfTests << " [ns]\n";
-        file << "Average time of the deletion of the heap's root " << results[1]/numberOfTests << " [ns]\n";
-        file << "Average time of the search for a random value in the heap " << results[2]/numberOfTests << " [ns]\n";
+        file << "Average time of the insertion of an element to the heap " << results[0] / numberOfTests << " [ns]\n";
+        file << "Average time of the deletion of the heap's root " << results[1] / numberOfTests << " [ns]\n";
+        file << "Average time of the search for a random value in the heap " << results[2] / numberOfTests << " [ns]\n";
     } else
         std::cout << "File error - OPEN\n";
+}
+
+void Heap::deleteValByIndex(int index) {
+    if (index >= 0 && index < size) {
+        increaseValue(index, INT_MAX);
+        deleteRoot();
+    } else {
+        cout << "Index out of bounds\n";
+    }
+
 }
 
 

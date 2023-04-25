@@ -182,13 +182,15 @@ void Menu::menuHeap() {
     do {
         std::cout << "\n==== TABLE MENU ====\n";
         std::cout << "1.Load your heap from file\n";
-        std::cout << "2.Delete\n";
+        std::cout << "2.Delete by val\n";
         std::cout << "3.Add\n";
         std::cout << "4.Find entered value\n";
         std::cout << "5.Generate the heap\n";
         std::cout << "6.Display the heap\n";
         std::cout << "7.Time tests\n";
-        std::cout << "8.Exit\n";
+        std::cout << "8.Delete by index\n";
+        std::cout << "9.Exit\n";
+
 
         std::cin.clear();
         fflush(stdin);
@@ -208,7 +210,7 @@ void Menu::menuHeap() {
             case 2: // deleting a value from given index
                 std::cout << "Enter value to deletion:";
                 std::cin >> val;
-                myHeap.deleteVal(val);
+                myHeap.deleteVal(val); // deletion by value
                 myHeap.displayHeap();
                 break;
             case 3: // adding a given value to the heap
@@ -221,6 +223,7 @@ void Menu::menuHeap() {
                 std::cout << "Enter value:";
                 std::cin >> val;
                 myHeap.isValInHeap(val);
+//                myHeap.searchHeap(val);
                 break;
             case 5: // generating the heap
                 std::cout << "Enter the size of your heap";
@@ -237,12 +240,18 @@ void Menu::menuHeap() {
                 myHeap.generateHeap(val);
                 myHeap.measureTime(numberOfTests,val);
                 break;
-            case 8: // exit
+            case 8: // deletion by index
+                std::cout << "Enter index to deletion:";
+                std::cin >> val;
+                myHeap.deleteValByIndex(val); // deletion by index
+                myHeap.displayHeap();
+                break;
+            case 9: // exit
                 break;
             default:
                 std::cout << "Input error!\n";
                 break;
         }
-    } while (option != 8);
+    } while (option != 9);
 }
 
