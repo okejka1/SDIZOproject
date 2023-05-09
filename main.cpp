@@ -39,7 +39,7 @@ int main() {
                 std::cout << "bye\n";
                 break;
             default:
-                std::cout << "Input error! - make sure to chose an option available from the main menu!";
+                std::cout << "Input error! - make sure to choose an option available from the main menu!";
                 break;
         }
     } while (option != 4);

@@ -98,8 +98,7 @@ void Heap::generateHeap(int sizeOfHeap) {
     }
 
     size = sizeOfHeap;
-
-    // floyd's algorithm
+    
     for (int i = (size - 1) / 2; i >= 0; i--) { // size-1/2 -> it's an index of last parent and 
         heapify(i);
     }
